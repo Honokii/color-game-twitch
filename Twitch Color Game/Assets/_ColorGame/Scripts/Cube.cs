@@ -19,7 +19,7 @@ namespace ColorGame {
         private float _tossForce = 20f;
 
         [SerializeField]
-        private CubeFace[] _faceColor = new CubeFace[6];
+        private float _rotateForce = 20f;
 
         private Rigidbody _rigidbody;
 
@@ -36,6 +36,7 @@ namespace ColorGame {
         private void Start() {
             GameManager.Instance?.RegisterCube(this);
             _rigidbody = GetComponent<Rigidbody>();
+            _rigidbody.maxAngularVelocity = 100f;
             _lastPosition = transform.position;
         }
 
@@ -67,9 +68,9 @@ namespace ColorGame {
             float rForce = Random.Range(_tossForce, _tossForce * 1.5f);
             _rigidbody.AddForce(Vector3.up * rForce);
 
-            float x = Random.Range(_tossForce, _tossForce * 1.5f);
-            float y = Random.Range(_tossForce, _tossForce * 1.5f);
-            float z = Random.Range(_tossForce, _tossForce * 1.5f);
+            float x = Random.Range(_rotateForce, _rotateForce * 3f);
+            float y = Random.Range(_rotateForce, _rotateForce * 3f);
+            float z = Random.Range(_rotateForce, _rotateForce * 3f);
             Vector3 torq = new Vector3(x, y, z);
             _rigidbody.AddTorque(torq);
         }
