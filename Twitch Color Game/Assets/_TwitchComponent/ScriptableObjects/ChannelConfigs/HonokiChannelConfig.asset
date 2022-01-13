@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bbbc8eff5d3b564a8ae5e99d656b866, type: 3}
+  m_Name: HonokiChannelConfig
+  m_EditorClassIdentifier: 
+  _UserName: honokii
+  _ClientId: gp762nuuoqcoxypju8c569th9wz7q5
+  _AccessToken: zhw1wluxxcdj0jfd3dnwfx272ut7lz
+  _RefreshToken: ff6ipffzaf4759aklp0j46y6pm8lxh9rimyy67z6rzbjtvybra

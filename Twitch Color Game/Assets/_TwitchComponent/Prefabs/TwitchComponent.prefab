@@ -1,0 +1,108 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &701161250201586789
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 701161250201586788}
+  - component: {fileID: 701161250201586785}
+  - component: {fileID: 701161250201586784}
+  - component: {fileID: 701161250201586791}
+  - component: {fileID: 701161250201586790}
+  - component: {fileID: 701161250201586787}
+  m_Layer: 0
+  m_Name: TwitchComponent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &701161250201586788
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 701161250201586789}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &701161250201586785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 701161250201586789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c843a9a3af6bcef48ad4d209bb4e297a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &701161250201586784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 701161250201586789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4250600cfebc9b4a97a578a27c79fc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &701161250201586791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 701161250201586789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28ad6da9b47553d43a7df7599287e432, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &701161250201586790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 701161250201586789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73babd0e13a5848408823ca9a92b05c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _BotConfig: {fileID: 11400000, guid: 43c499a805c52e943ac7edeabc1762a9, type: 2}
+  _StreamerConfig: {fileID: 11400000, guid: cb6fa2307672d6a44a280b324b6ab122, type: 2}
+  _ApiComponent: {fileID: 701161250201586785}
+  _PubsubComponent: {fileID: 701161250201586784}
+  _ClientComponent: {fileID: 701161250201586791}
+--- !u!114 &701161250201586787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 701161250201586789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4092c10cd9bb4fe459ab246b40f0f7e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onTwitchMessageReceivedEvent: {fileID: 11400000, guid: 555aeb7a57c51ea4a8d51ecaa30430d5,
+    type: 2}
+  onTwitchCommandReceivedEvent: {fileID: 11400000, guid: 22c4a8f9de29c9f488502ae668a80133,
+    type: 2}
+  onTwitchChannelPointRedeemedEvent: {fileID: 11400000, guid: f0a552e5c53a31040966fd3a0c4c25c9,
+    type: 2}
