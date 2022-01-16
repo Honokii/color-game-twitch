@@ -6,6 +6,8 @@ using WIS.TwitchComponent.Events;
 namespace ColorGame.User {
     public class UserManager : MonoBehaviour {
 
+        public static UserManager Instance = null;
+
         private UserCollection _users;
         private UserSaveLoadManager _saveLoadManager;
         private UserPointRedeemDictionary _pointRedeemDictionary;
@@ -14,11 +16,17 @@ namespace ColorGame.User {
         private UserCommandDictionary _commandDictionary = null;
         
         private void Awake() {
+            Instance = this;
+
             _users = new UserCollection();
             _saveLoadManager = new UserSaveLoadManager();
             _pointRedeemDictionary = new UserPointRedeemDictionary();
 
             _saveLoadManager.LoadUserData(SetUsers);
+        }
+
+        private void OnDestroy() {
+            Instance = null;
         }
 
         private void SetUsers(List<User> users) {
@@ -35,6 +43,23 @@ namespace ColorGame.User {
             }
 
             _users.AddUser(userName, displayName, points);
+            SaveCurrentUserData();
+        }
+
+        public bool UsePoints(string userName, int points) {
+            if (!_users.IsValidUser(userName)) {
+                return false;
+            }
+
+            var user = _users.GetUser(userName);
+            if (user.UserPoints < points) {
+                return false;
+            }
+
+            int newPointValue = user.UserPoints - points;
+            _users.UpdateUserPoint(userName, newPointValue);
+            SaveCurrentUserData();
+            return true;
         }
 
         public void AddPoints(string userName, int points) {
@@ -44,6 +69,7 @@ namespace ColorGame.User {
 
             int currentPoints = _users.GetUserPoint(userName);
             _users.UpdateUserPoint(userName, currentPoints + points);
+            SaveCurrentUserData();
         }
 
         private void HandlePointRedeem(string redeemKey, string userName, string displayName) {
@@ -54,7 +80,9 @@ namespace ColorGame.User {
             } else {
                 AddPoints(userName, points);
             }
+        }
 
+        private void SaveCurrentUserData() {
             _saveLoadManager.SaveUserData(_users.UserList);
         }
 

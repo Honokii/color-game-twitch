@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace ColorGame {
     public class Cube : MonoBehaviour {
@@ -31,6 +32,8 @@ namespace ColorGame {
 
         public CubeEvents GetCubeEvents = new CubeEvents();
 
+        public OnCubeMovementComplete CubeMovementComplete = new OnCubeMovementComplete();
+
         #region Unity Methods
 
         private void Start() {
@@ -60,7 +63,7 @@ namespace ColorGame {
             if (_isMoving && _rigidbody.velocity.magnitude == 0) {
                 GetCubeEvents.onCubeTossCompleted?.Invoke(this);
                 _isMoving = false;
-                CurrentTopFace();
+                CubeMovementComplete?.Invoke(CurrentTopFace());
             }
         }
 
@@ -113,4 +116,6 @@ namespace ColorGame {
             return result;
         }
     }
+
+    public class OnCubeMovementComplete : UnityEvent<Cube.CubeFace> { }
 }

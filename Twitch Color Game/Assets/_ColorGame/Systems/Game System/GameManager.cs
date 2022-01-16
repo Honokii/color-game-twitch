@@ -1,12 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace ColorGame {
     public class GameManager : MonoBehaviour {
         public static GameManager Instance = null;
 
         private List<Cube> _cubes = new List<Cube>();
+        private List<Cube.CubeFace> _currentCubeFaces = new List<Cube.CubeFace>();
+
+        [SerializeField]
+        private OnCheckCubeFaces _checkCubeFaces = null;
 
         #region Unity Methods
 
@@ -35,6 +40,7 @@ namespace ColorGame {
                 return;
             }
 
+            cube.CubeMovementComplete.AddListener(CubeMovementComplete);
             _cubes.Add(cube);
         }
 
@@ -43,10 +49,12 @@ namespace ColorGame {
                 return;
             }
 
+            cube.CubeMovementComplete.RemoveListener(CubeMovementComplete);
             _cubes.Remove(cube);
         }
 
-        private void TossCubes() {
+        public void TossCubes() {
+            _currentCubeFaces = new List<Cube.CubeFace>();
             if (_cubes.Count == 0) {
                 return;
             }
@@ -55,5 +63,16 @@ namespace ColorGame {
                 cube.Toss();
             }
         }
+
+        private void CubeMovementComplete(Cube.CubeFace cubeFace) {
+            _currentCubeFaces.Add(cubeFace);
+
+            if (_currentCubeFaces.Count == _cubes.Count) {
+                _checkCubeFaces.Invoke(_currentCubeFaces);
+            }
+        }
     }
+
+    [System.Serializable]
+    public class OnCheckCubeFaces : UnityEvent<List<Cube.CubeFace>> { }
 }
