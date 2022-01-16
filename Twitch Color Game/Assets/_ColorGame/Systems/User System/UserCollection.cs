@@ -1,8 +1,21 @@
-﻿using System.Collections.Generic;
+﻿using System.Linq;
+using System.Collections.Generic;
 
 namespace ColorGame.User {
     public class UserCollection {
         private Dictionary<string, User> _users = new Dictionary<string, User>();
+
+        public List<User> UserList {
+            get {
+                return _users.Values.ToList();
+            }
+        }
+
+        public void SetUsers(List<User> users) {
+            foreach(var user in users) {
+                _users[user.UserName] = user;
+            }
+        }
 
         public void AddUser(string userName, string displayName, int point) {
             if (_users.ContainsKey(userName)) {
@@ -46,11 +59,15 @@ namespace ColorGame.User {
         }
 
         public User GetUser(string userName) {
-            if (!_users.ContainsKey(userName)) {
+            if (!IsValidUser(userName)) {
                 return null;
             }
 
             return _users[userName];
+        }
+
+        public bool IsValidUser(string userName) {
+            return _users.ContainsKey(userName);
         }
 
         public int GetUserPoint(string userName) {
