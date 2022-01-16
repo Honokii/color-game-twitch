@@ -71,6 +71,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28ad6da9b47553d43a7df7599287e432, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _onCommandReceivedEvent: {fileID: 11400000, guid: 22c4a8f9de29c9f488502ae668a80133,
+    type: 2}
 --- !u!114 &701161250201586790
 MonoBehaviour:
   m_ObjectHideFlags: 0

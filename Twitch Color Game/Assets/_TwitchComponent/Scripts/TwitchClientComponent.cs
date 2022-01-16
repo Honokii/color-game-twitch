@@ -101,7 +101,7 @@
                 UserDisplayName = e.Command.ChatMessage.DisplayName,
                 UserIsBroadcaster = e.Command.ChatMessage.IsBroadcaster,
                 UserIsModeretor = e.Command.ChatMessage.IsModerator,
-                UserLoginName = e.Command.ChatMessage.Username
+                Username = e.Command.ChatMessage.Username
             });
         }
 

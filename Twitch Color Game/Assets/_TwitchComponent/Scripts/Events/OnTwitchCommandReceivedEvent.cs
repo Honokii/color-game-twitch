@@ -8,7 +8,7 @@
         public string CommandString = null;
         public string[] CommandArguments = null;
         public string UserDisplayName = null;
-        public string UserLoginName = null;
+        public string Username = null;
         public bool UserIsBroadcaster = false;
         public bool UserIsModeretor = false;
     }

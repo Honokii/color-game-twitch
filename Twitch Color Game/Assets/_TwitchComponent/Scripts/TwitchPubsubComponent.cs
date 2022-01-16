@@ -67,15 +67,12 @@
         }
 
         private void ChannelPointsRewardRedeemed(object sender, OnChannelPointsRewardRedeemedArgs e) {
-            // Debug.Log(e.RewardRedeemed.Redemption.Id);
-            var noSpace = e.RewardRedeemed.Redemption.Reward.Title.Replace(" ", string.Empty);
-            var smallTitle = noSpace.ToLower();
-
             TwitchEventComponent.Instance.onTwitchChannelPointRedeemedEvent?.Raise(new OnTwitchChannelPointRedeemedEventArgs() {
-                RewardTitle = smallTitle,
+                RewardTitle = e.RewardRedeemed.Redemption.Reward.Title,
+                UserName = e.RewardRedeemed.Redemption.User.Login,
                 UserDisplayName = e.RewardRedeemed.Redemption.User.DisplayName,
                 UserInput = e.RewardRedeemed.Redemption.UserInput
-            });
+            }) ;
         }
 
         #endregion

@@ -62,5 +62,13 @@
                 StartFetchingClipForUser(args.CommandArguments[0], null);
             }
         }
+
+        #region Static Methods
+
+        public static void SendTwitchMessage(string message) {
+            Instance._ClientComponent.SendTwitchMessage(message);
+        }
+
+        #endregion
     }
 }

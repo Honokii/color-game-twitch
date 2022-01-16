@@ -7,6 +7,7 @@
 
     public class OnTwitchChannelPointRedeemedEventArgs {
         public string RewardTitle = null;
+        public string UserName = null;
         public string UserDisplayName = null;
         public string UserInput = null;
     }
