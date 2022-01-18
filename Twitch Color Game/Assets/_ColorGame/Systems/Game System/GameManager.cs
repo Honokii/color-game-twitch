@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using WIS.TwitchComponent.Events;
+using WIS.TwitchComponent.Commands;
 
 namespace ColorGame {
     public class GameManager : MonoBehaviour {
@@ -9,6 +11,9 @@ namespace ColorGame {
 
         private List<Cube> _cubes = new List<Cube>();
         private List<Cube.CubeFace> _currentCubeFaces = new List<Cube.CubeFace>();
+
+        [SerializeField]
+        private ColorBoard _colorBoard = null;
 
         [SerializeField]
         private OnCheckCubeFaces _checkCubeFaces = null;
@@ -71,6 +76,25 @@ namespace ColorGame {
                 _checkCubeFaces.Invoke(_currentCubeFaces);
             }
         }
+
+        #region Twitch Callbacks
+
+        public void OnTossCommand(string userName, string[] args) {
+            TossCubes();
+        }
+
+        //bet red 50
+        public void OnBetCommand(string userName, string[] args) {
+            if (args.Length != 2) {
+                return;
+            }
+
+            var face = ColorBoard.GetCubeFace(args[0]);
+            int amount = ColorBoard.GetAmount(args[1]);
+            _colorBoard.OnAddBetCommand(userName, face, amount);
+        }
+
+        #endregion
     }
 
     [System.Serializable]

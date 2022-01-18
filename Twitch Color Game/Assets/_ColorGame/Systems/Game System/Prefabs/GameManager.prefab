@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9165482972683779868}
   - component: {fileID: 8048144149188246946}
   - component: {fileID: 8248079427101329986}
-  - component: {fileID: 202613838743098400}
+  - component: {fileID: 2226848606443862318}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: effc19417a08b9b44b80e0f28aeeb6c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _colorBoard: {fileID: 8048144149188246946}
   _checkCubeFaces:
     m_PersistentCalls:
       m_Calls:
@@ -72,7 +73,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0e6a7a764501514284f0564d438e859, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _commandDictionary: {fileID: 202613838743098400}
+  _commandDictionary: {fileID: 0}
 --- !u!114 &8248079427101329986
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -88,19 +89,8 @@ MonoBehaviour:
   _GameEvent: {fileID: 11400000, guid: 22c4a8f9de29c9f488502ae668a80133, type: 2}
   _Response:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8048144149188246946}
-        m_MethodName: TwitchCommandReceived
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &202613838743098400
+      m_Calls: []
+--- !u!114 &2226848606443862318
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -109,14 +99,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 9165482972683779858}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2aa16644cb03b742a213b688f691a43, type: 3}
+  m_Script: {fileID: 11500000, guid: aa13d3df467b2014181a2964bbae957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
-    - {fileID: 8048144149188246946}
+    - {fileID: 9165482972683779868}
     - {fileID: 0}
     - {fileID: 0}
     SerializedBytesString: 
@@ -124,9 +114,9 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
-    - Name: CommandDatas
+    - Name: _commands
       Entry: 7
-      Data: 0|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[ColorGame.User.UserCommandData,
+      Data: 0|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[WIS.TwitchComponent.Commands.Command,
         Assembly-CSharp]], mscorlib
     - Name: comparer
       Entry: 7
@@ -143,22 +133,19 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 1
-      Data: cgbet
+      Data: toss
     - Name: $v
       Entry: 7
-      Data: 2|ColorGame.User.UserCommandData, Assembly-CSharp
+      Data: 2|WIS.TwitchComponent.Commands.Command, Assembly-CSharp
     - Name: CommandString
       Entry: 1
-      Data: cgbet
-    - Name: IsBroadcasterCommand
-      Entry: 5
-      Data: false
-    - Name: IsModeratorCommand
-      Entry: 5
-      Data: false
-    - Name: CommandAction
+      Data: toss
+    - Name: UserLevel
+      Entry: 3
+      Data: 8
+    - Name: OnCommandAction
       Entry: 7
-      Data: 3|ColorGame.User.UserCommandAction, Assembly-CSharp
+      Data: 3|WIS.TwitchComponent.Commands.CommandAction, Assembly-CSharp
     - Name: m_PersistentCalls
       Entry: 7
       Data: 4|UnityEngine.Events.PersistentCallGroup, UnityEngine.CoreModule
@@ -177,7 +164,7 @@ MonoBehaviour:
       Data: 0
     - Name: m_MethodName
       Entry: 1
-      Data: OnBetCommandReceived
+      Data: OnTossCommand
     - Name: m_Mode
       Entry: 3
       Data: 0
@@ -234,22 +221,19 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 1
-      Data: cgtoss
+      Data: bet
     - Name: $v
       Entry: 7
-      Data: 8|ColorGame.User.UserCommandData, Assembly-CSharp
+      Data: 8|WIS.TwitchComponent.Commands.Command, Assembly-CSharp
     - Name: CommandString
       Entry: 1
-      Data: cgtoss
-    - Name: IsBroadcasterCommand
-      Entry: 5
-      Data: false
-    - Name: IsModeratorCommand
-      Entry: 5
-      Data: true
-    - Name: CommandAction
+      Data: bet
+    - Name: UserLevel
+      Entry: 3
+      Data: 0
+    - Name: OnCommandAction
       Entry: 7
-      Data: 9|ColorGame.User.UserCommandAction, Assembly-CSharp
+      Data: 9|WIS.TwitchComponent.Commands.CommandAction, Assembly-CSharp
     - Name: m_PersistentCalls
       Entry: 7
       Data: 10|UnityEngine.Events.PersistentCallGroup, UnityEngine.CoreModule
@@ -268,7 +252,7 @@ MonoBehaviour:
       Data: 0
     - Name: m_MethodName
       Entry: 1
-      Data: OnColorGameToss
+      Data: OnBetCommand
     - Name: m_Mode
       Entry: 3
       Data: 0
@@ -326,3 +310,4 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+  DictionaryId: Game Commands

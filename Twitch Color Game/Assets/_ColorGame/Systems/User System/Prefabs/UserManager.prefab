@@ -10,9 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2696880165221182649}
   - component: {fileID: 2696880165221182654}
-  - component: {fileID: 6308190781197017845}
-  - component: {fileID: 6931980839496918933}
-  - component: {fileID: 4724863453560203728}
+  - component: {fileID: 8768863988263105820}
+  - component: {fileID: 8332826835085373243}
   m_Layer: 0
   m_Name: UserManager
   m_TagString: Untagged
@@ -46,35 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d2a776a63a0e064f8659bd04e47094e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _commandDictionary: {fileID: 4724863453560203728}
---- !u!114 &6308190781197017845
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2696880165221182648}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90abe567b87169a40a6b2535d34adb19, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _GameEvent: {fileID: 11400000, guid: f0a552e5c53a31040966fd3a0c4c25c9, type: 2}
-  _Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2696880165221182654}
-        m_MethodName: TwitchPointRedeemed
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &6931980839496918933
+  _commandDictionary: {fileID: 0}
+--- !u!114 &8768863988263105820
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -86,22 +58,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ac0f3e8fe7b13c4c8671d0a59f419d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _GameEvent: {fileID: 11400000, guid: 22c4a8f9de29c9f488502ae668a80133, type: 2}
+  _GameEvent: {fileID: 0}
   _Response:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2696880165221182654}
-        m_MethodName: InquirePointsCommandReceived
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &4724863453560203728
+      m_Calls: []
+--- !u!114 &8332826835085373243
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -110,7 +71,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2696880165221182648}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2aa16644cb03b742a213b688f691a43, type: 3}
+  m_Script: {fileID: 11500000, guid: aa13d3df467b2014181a2964bbae957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   serializationData:
@@ -124,9 +85,9 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
-    - Name: CommandDatas
+    - Name: _commands
       Entry: 7
-      Data: 0|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[ColorGame.User.UserCommandData,
+      Data: 0|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[WIS.TwitchComponent.Commands.Command,
         Assembly-CSharp]], mscorlib
     - Name: comparer
       Entry: 7
@@ -146,19 +107,16 @@ MonoBehaviour:
       Data: cgpoints
     - Name: $v
       Entry: 7
-      Data: 2|ColorGame.User.UserCommandData, Assembly-CSharp
+      Data: 2|WIS.TwitchComponent.Commands.Command, Assembly-CSharp
     - Name: CommandString
       Entry: 1
       Data: cgpoints
-    - Name: IsBroadcasterCommand
-      Entry: 5
-      Data: false
-    - Name: IsModeratorCommand
-      Entry: 5
-      Data: false
-    - Name: CommandAction
+    - Name: UserLevel
+      Entry: 3
+      Data: 0
+    - Name: OnCommandAction
       Entry: 7
-      Data: 3|ColorGame.User.UserCommandAction, Assembly-CSharp
+      Data: 3|WIS.TwitchComponent.Commands.CommandAction, Assembly-CSharp
     - Name: m_PersistentCalls
       Entry: 7
       Data: 4|UnityEngine.Events.PersistentCallGroup, UnityEngine.CoreModule
@@ -235,3 +193,4 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+  DictionaryId: User Manager

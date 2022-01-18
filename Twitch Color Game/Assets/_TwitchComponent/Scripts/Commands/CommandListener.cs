@@ -25,7 +25,7 @@
             }
             
             foreach (var command in _Commands) {
-                command.InvokeCommand(args);
+                //command.InvokeCommand(args);
             }
         }
     }

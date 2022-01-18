@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using ColorGame.User;
 using WIS.TwitchComponent;
-using WIS.TwitchComponent.Events;
 
 namespace ColorGame {
     public class ColorBoard : MonoBehaviour {
@@ -30,9 +28,6 @@ namespace ColorGame {
 
         private List<Bet> _bets = new List<Bet>();
 
-        [SerializeField]
-        private UserCommandDictionary _commandDictionary = null;
-
         public void HandleBetRewards(List<Cube.CubeFace> cubeFaces) {
             if (_bets.Count == 0) return;
 
@@ -59,10 +54,6 @@ namespace ColorGame {
         }
 
         #region Twitch Command Receiver
-
-        public void TwitchCommandReceived(OnTwitchCommandReceivedEventArgs args) {
-            _commandDictionary.HandleCommandInvocation(args.CommandString, args.UserIsBroadcaster, args.UserIsModeretor, args.Username, args.CommandArguments);
-        }
 
         #endregion
 
@@ -117,7 +108,7 @@ namespace ColorGame {
             _bets.RemoveAt(betIndex);
         }
 
-        private Cube.CubeFace GetCubeFace(string colorString) {
+        public static Cube.CubeFace GetCubeFace(string colorString) {
             switch (colorString) {
                 case BetColorBlueKey: return Cube.CubeFace.Blue;
                 case BetColorGreenKey: return Cube.CubeFace.Green;
@@ -129,7 +120,7 @@ namespace ColorGame {
             }
         }
 
-        private int GetAmount(string amountString) {
+        public static int GetAmount(string amountString) {
             int result = 0;
             if (int.TryParse(amountString, out result)) {
                 return result;

@@ -101,10 +101,6 @@ namespace ColorGame.User {
         private const string UnregisteredUserMessage = "Action Failed! User:{0} was not registered. Register by redeeming points first.";
         private const string InquirePointMessage = "{0} currently have {1} points!";
 
-        public void InquirePointsCommandReceived(OnTwitchCommandReceivedEventArgs args) {
-            _commandDictionary.HandleCommandInvocation(args.CommandString, args.UserIsBroadcaster, args.UserIsModeretor, args.Username, args.CommandArguments);
-        }
-
         public void InquirePointsCommand(string userName, string[] args) {
             var user = _users.GetUser(userName);
             string message;
