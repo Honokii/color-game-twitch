@@ -82,6 +82,10 @@ namespace ColorGame.User {
             }
         }
 
+        public int GetUserPoint(string userName) {
+            return _users.GetUserPoint(userName);
+        }
+
         private void SaveCurrentUserData() {
             _saveLoadManager.SaveUserData(_users.UserList);
         }

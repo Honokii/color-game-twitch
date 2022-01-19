@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using WIS.TwitchComponent;
+using ColorGame.User;
 
 namespace ColorGame {
     public class ColorBoard : MonoBehaviour {
@@ -19,9 +20,9 @@ namespace ColorGame {
         #endregion
 
         #region Twitch Messages
-        private const string BetRewardMessage = "Congratulations {0}! you just won x{1} of your bet!";
-        private const string BetLooseMessage = "LOL! {0} just lost {1} points.";
-        private const string BetSuccessMessage = "{0} bet registered!";
+        private const string BetRewardMessage = "Congratulations {0}! You just won x{1} of your bet! Your current points : {2}";
+        private const string BetLooseMessage = "LOL! {0} just lost {1} points. Your current points : {2}";
+        private const string BetSuccessMessage = "{0} bet registered! Your current points : {1}";
         private const string BetFailedMessage = "Sorry, {0} bet failed! make sure you have enough points before betting.";
         private const string ColorGameTossStartedMessage = "{0} have started the toss!";
         #endregion
@@ -42,15 +43,19 @@ namespace ColorGame {
 
             foreach(var bet in _bets) {
                 if (!rewardMult.ContainsKey(bet.ColorFace)) {
-                    TwitchComponent.SendTwitchMessage(string.Format(BetLooseMessage, bet.UserName, bet.Amount.ToString()));
+                    TwitchComponent.SendTwitchMessage(string.Format(BetLooseMessage, bet.UserName, bet.Amount, GetUserPoint(bet.UserName)));
                     continue;
                 }
 
                 bet.RewardUser(rewardMult[bet.ColorFace]);
-                TwitchComponent.SendTwitchMessage(string.Format(BetRewardMessage, bet.UserName, rewardMult[bet.ColorFace]));
+                TwitchComponent.SendTwitchMessage(string.Format(BetRewardMessage, bet.UserName, rewardMult[bet.ColorFace], GetUserPoint(bet.UserName)));
             }
 
             _bets.Clear();
+        }
+
+        private int GetUserPoint(string userName) {
+            return UserManager.Instance.GetUserPoint(userName);
         }
 
         #region Twitch Command Receiver
@@ -86,7 +91,7 @@ namespace ColorGame {
             Bet bet = new Bet(userName, cubeFace, amount);
             if (bet.UseUserPoint()) {
                 _bets.Add(bet);
-                TwitchComponent.SendTwitchMessage(string.Format(BetSuccessMessage, userName));
+                TwitchComponent.SendTwitchMessage(string.Format(BetSuccessMessage, userName, GetUserPoint(userName)));
             } else {
                 TwitchComponent.SendTwitchMessage(string.Format(BetFailedMessage, userName));
             }

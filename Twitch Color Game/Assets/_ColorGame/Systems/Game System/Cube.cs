@@ -106,6 +106,7 @@ namespace ColorGame {
             //left
             if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.left), out hit, 2f, layerMask)) {
                 Debug.Log("Yellow");
+                result = CubeFace.Yellow;
             }
             //right
             if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), out hit, 2f, layerMask)) {
