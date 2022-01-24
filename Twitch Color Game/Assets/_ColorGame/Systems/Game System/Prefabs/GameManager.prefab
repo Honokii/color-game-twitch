@@ -46,7 +46,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: effc19417a08b9b44b80e0f28aeeb6c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _colorBoard: {fileID: 8048144149188246946}
   _checkCubeFaces:
     m_PersistentCalls:
       m_Calls:
@@ -73,7 +72,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0e6a7a764501514284f0564d438e859, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _commandDictionary: {fileID: 0}
 --- !u!114 &8248079427101329986
 MonoBehaviour:
   m_ObjectHideFlags: 0

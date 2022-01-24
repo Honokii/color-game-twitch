@@ -1,26 +1,21 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
+using Sirenix.OdinInspector;
 
 namespace ColorGame {
     public class Cube : MonoBehaviour {
-
-        public enum CubeFace {
-            Undefined = 0,
-            Blue = 1,
-            Green = 2,
-            Orange = 3,
-            Red = 4,
-            Violet = 5,
-            Yellow = 6
-        }
 
         [SerializeField]
         private float _tossForce = 20f;
 
         [SerializeField]
         private float _rotateForce = 20f;
+
+        [SerializeField, TableList]
+        private CubeFace[] _faces;
+
+        [SerializeField]
+        private CubeFace _defaultFace;
 
         private Rigidbody _rigidbody;
 
@@ -29,6 +24,10 @@ namespace ColorGame {
         private float _movementThreshold = 0.01f;
 
         private bool _isMoving = false;
+
+        private RaycastHit _hit;
+        private int _floorLayerMask = 1 << 10;
+        private float _checkDistance = 1f;
 
         public CubeEvents GetCubeEvents = new CubeEvents();
 
@@ -63,7 +62,7 @@ namespace ColorGame {
             if (_isMoving && _rigidbody.velocity.magnitude == 0) {
                 GetCubeEvents.onCubeTossCompleted?.Invoke(this);
                 _isMoving = false;
-                CubeMovementComplete?.Invoke(CurrentTopFace());
+                CubeMovementComplete?.Invoke(GetTopFaceColorData().ColorId);
             }
         }
 
@@ -78,45 +77,27 @@ namespace ColorGame {
             _rigidbody.AddTorque(torq);
         }
 
-        public CubeFace CurrentTopFace() {
-            CubeFace result = CubeFace.Undefined;
+        public ColorData GetTopFaceColorData() {
+            var result = _defaultFace.FaceColorData;
 
-            int layerMask = 1 << 10;
-            RaycastHit hit;
+            if (_faces.Length == 0) {
+                return result;
+            }
 
-            //up
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.up), out hit, 2f, layerMask)) {
-                result = CubeFace.Red;
-                Debug.Log("Red");
-            }
-            //down
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, 2f, layerMask)) {
-                result = CubeFace.Orange;
-                Debug.Log("Orange");
-            }
-            //forward
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 2f, layerMask)) {
-                Debug.Log("Blue");
-            }
-            //backward
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.back), out hit, 2f, layerMask)) {
-                Debug.Log("Green");
-                result = CubeFace.Green;
-            }
-            //left
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.left), out hit, 2f, layerMask)) {
-                Debug.Log("Yellow");
-                result = CubeFace.Yellow;
-            }
-            //right
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), out hit, 2f, layerMask)) {
-                result = CubeFace.Violet;
-                Debug.Log("Violet");
+            foreach(var face in _faces) {
+                if (IsDirectionSelected(face.FaceDirection, _hit, _checkDistance, _floorLayerMask)) {
+                    result = face.FaceColorData;
+                    break;
+                }
             }
 
             return result;
         }
+
+        private bool IsDirectionSelected(Vector3 direction, RaycastHit hit, float checkDistance, int layerMask) {
+            return Physics.Raycast(transform.position, transform.TransformDirection(direction), out hit, checkDistance, layerMask);
+        }
     }
 
-    public class OnCubeMovementComplete : UnityEvent<Cube.CubeFace> { }
+    public class OnCubeMovementComplete : UnityEvent<ColorDataId> { }
 }

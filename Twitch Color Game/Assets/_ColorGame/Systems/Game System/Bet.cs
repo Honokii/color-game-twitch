@@ -3,12 +3,12 @@
 namespace ColorGame {
     public class Bet {
         public string UserName;
-        public Cube.CubeFace ColorFace;
+        public ColorDataId ColorFaceId;
         public int Amount;
 
-        public Bet(string userName, Cube.CubeFace colorFace, int amount) {
+        public Bet(string userName, ColorDataId colorFaceId, int amount) {
             UserName = userName;
-            ColorFace = colorFace;
+            ColorFaceId = colorFaceId;
             Amount = amount;
         }
 

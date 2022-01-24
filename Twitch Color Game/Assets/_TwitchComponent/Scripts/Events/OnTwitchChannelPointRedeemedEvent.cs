@@ -1,5 +1,4 @@
 ﻿namespace WIS.TwitchComponent.Events {
-    using System;
     using UnityEngine;
     using WIS.Utils.Events;
     [CreateAssetMenu(fileName = "New TwichChannelPointRedeemedEvent", menuName = "Twitch Component/Events/Channel Point Redeemed")]

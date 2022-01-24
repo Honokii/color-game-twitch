@@ -1,41 +1,34 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using WIS.TwitchComponent.Events;
-using WIS.TwitchComponent.Commands;
+using WIS.Utils.Helpers;
 
 namespace ColorGame {
     public class GameManager : MonoBehaviour {
         public static GameManager Instance = null;
 
         private List<Cube> _cubes = new List<Cube>();
-        private List<Cube.CubeFace> _currentCubeFaces = new List<Cube.CubeFace>();
-
-        [SerializeField]
+        private List<ColorDataId> _currentColorFaces = new List<ColorDataId>();
         private ColorBoard _colorBoard = null;
-
-        [SerializeField]
-        private OnCheckCubeFaces _checkCubeFaces = null;
+        private OnCheckColorFaces _checkColorFaces = new OnCheckColorFaces();
 
         #region Unity Methods
 
+        private void Start() {
+            _colorBoard = GetComponent<ColorBoard>();
+            _checkColorFaces.AddListener(_colorBoard.HandleBetRewards);
+        }
+
+        private void OnDestroy() {
+            _checkColorFaces.RemoveListener(_colorBoard.HandleBetRewards);
+        }
+
         private void OnEnable() {
-            if (Instance == null) {
-                Instance = this;
-            }
+            if (Instance == null) Instance = this;
         }
 
         private void OnDisable() {
-            if (Instance == this) {
-                Instance = null;
-            }
-        }
-
-        private void Update() {
-            if (Input.GetKeyDown(KeyCode.Space)) {
-                TossCubes();
-            }
+            if (Instance == this) Instance = null;
         }
 
         #endregion
@@ -59,7 +52,7 @@ namespace ColorGame {
         }
 
         public void TossCubes() {
-            _currentCubeFaces = new List<Cube.CubeFace>();
+            _currentColorFaces = new List<ColorDataId>();
             if (_cubes.Count == 0) {
                 return;
             }
@@ -69,11 +62,11 @@ namespace ColorGame {
             }
         }
 
-        private void CubeMovementComplete(Cube.CubeFace cubeFace) {
-            _currentCubeFaces.Add(cubeFace);
+        private void CubeMovementComplete(ColorDataId colorId) {
+            _currentColorFaces.Add(colorId);
 
-            if (_currentCubeFaces.Count == _cubes.Count) {
-                _checkCubeFaces.Invoke(_currentCubeFaces);
+            if (_currentColorFaces.Count == _cubes.Count) {
+                _checkColorFaces?.Invoke(_currentColorFaces);
             }
         }
 
@@ -83,20 +76,24 @@ namespace ColorGame {
             TossCubes();
         }
 
-        //bet red 50
         public void OnBetCommand(string userName, string[] args) {
             if (args.Length != 2) {
                 return;
             }
 
-            var face = ColorBoard.GetCubeFace(args[0]);
-            int amount = ColorBoard.GetAmount(args[1]);
-            _colorBoard.OnAddBetCommand(userName, face, amount);
+            var colorData = ColorCollection.Instance.GetColorData(args[0]);
+            if (colorData.ColorId == ColorDataId.Undefined) {
+                return;
+            }
+
+            var colorDataId = colorData.ColorId;
+            int amount = StringHelper.GetInt(args[1]);
+            _colorBoard.AddBet(userName, colorDataId, amount);
         }
 
         #endregion
     }
 
     [System.Serializable]
-    public class OnCheckCubeFaces : UnityEvent<List<Cube.CubeFace>> { }
+    public class OnCheckColorFaces : UnityEvent<List<ColorDataId>> { }
 }

@@ -157,7 +157,7 @@ namespace ColorGame.User {
             }
 
             if (int.TryParse(args[1], out int points)) {
-                AddPoints(rewardingUserName, points);
+                SetPoints(rewardingUserName, points);
                 string message = string.Format(PointsSetToUserCommandMessage, rewardingUserName, points);
                 TwitchComponent.SendTwitchMessage(message);
             }

@@ -319,6 +319,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tossForce: 400
   _rotateForce: 30
+  _faces:
+  - {fileID: 11400000, guid: 2f69d544160854b4282b9d22e610ae39, type: 2}
+  - {fileID: 11400000, guid: 7e8388fce774bf747a07f95ebf83ab5b, type: 2}
+  - {fileID: 11400000, guid: bf643b5e39b3a7b4ea2cb7d722246b49, type: 2}
+  - {fileID: 11400000, guid: 58e8aa9423d6ad448a3c4cfa45d27b70, type: 2}
+  - {fileID: 11400000, guid: 3852fe6a044a7f3419cc1e29f1b62f47, type: 2}
+  - {fileID: 11400000, guid: 4632a0e08db404e499eed11f05ea5fc7, type: 2}
+  _defaultFace: {fileID: 11400000, guid: 756b36af1fce3b14184747ddad9062bd, type: 2}
 --- !u!1 &1430226150432412642
 GameObject:
   m_ObjectHideFlags: 0

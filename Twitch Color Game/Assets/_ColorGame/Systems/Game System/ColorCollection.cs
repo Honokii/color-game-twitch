@@ -4,6 +4,8 @@ using Sirenix.OdinInspector;
 
 namespace ColorGame {
     public class ColorCollection : MonoBehaviour {
+        public static ColorCollection Instance = null;
+
         [SerializeField, TableList]
         private ColorData[] _collection;
 
@@ -12,6 +14,18 @@ namespace ColorGame {
                 return _collection.Length;
             }
         }
+
+        #region Unity Methods
+
+        private void Start() {
+            if (Instance == null) Instance = this;
+        }
+
+        private void OnDestroy() {
+            if (Instance == this) Instance = null;
+        }
+
+        #endregion
 
         public ColorData GetColorData(ColorDataId dataId) {
             if (_collection == null || Count == 0) {
