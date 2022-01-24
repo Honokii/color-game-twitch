@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 2696880165221182649}
   - component: {fileID: 2696880165221182654}
   - component: {fileID: 8768863988263105820}
-  - component: {fileID: 8332826835085373243}
   - component: {fileID: 1231708684967076851}
+  - component: {fileID: 8332826835085373243}
   m_Layer: 0
   m_Name: UserManager
   m_TagString: Untagged
@@ -46,7 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d2a776a63a0e064f8659bd04e47094e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _commandDictionary: {fileID: 0}
+  _saveDataUpdatedEvent: {fileID: 11400000, guid: 1d36ad2d709f91e4abdd8792cc37ce4e,
+    type: 2}
 --- !u!114 &8768863988263105820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63,6 +64,33 @@ MonoBehaviour:
   _Response:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1231708684967076851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2696880165221182648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90abe567b87169a40a6b2535d34adb19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _GameEvent: {fileID: 11400000, guid: f0a552e5c53a31040966fd3a0c4c25c9, type: 2}
+  _Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2696880165221182654}
+        m_MethodName: TwitchPointRedeemed
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &8332826835085373243
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80,6 +108,8 @@ MonoBehaviour:
     SerializedBytes: 
     ReferencedUnityObjects:
     - {fileID: 2696880165221182654}
+    - {fileID: 0}
+    - {fileID: 0}
     - {fileID: 0}
     SerializedBytesString: 
     Prefab: {fileID: 0}
@@ -99,7 +129,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 1
+      Data: 3
     - Name: 
       Entry: 7
       Data: 
@@ -189,36 +219,185 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: addcgpoints
+    - Name: $v
+      Entry: 7
+      Data: 8|WIS.TwitchComponent.Commands.Command, Assembly-CSharp
+    - Name: CommandString
+      Entry: 1
+      Data: addcgpoints
+    - Name: UserLevel
+      Entry: 3
+      Data: 8
+    - Name: OnCommandAction
+      Entry: 7
+      Data: 9|WIS.TwitchComponent.Commands.CommandAction, Assembly-CSharp
+    - Name: m_PersistentCalls
+      Entry: 7
+      Data: 10|UnityEngine.Events.PersistentCallGroup, UnityEngine.CoreModule
+    - Name: m_Calls
+      Entry: 7
+      Data: 11|System.Collections.Generic.List`1[[UnityEngine.Events.PersistentCall,
+        UnityEngine.CoreModule]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 12|UnityEngine.Events.PersistentCall, UnityEngine.CoreModule
+    - Name: m_Target
+      Entry: 10
+      Data: 0
+    - Name: m_MethodName
+      Entry: 1
+      Data: AddPointsCommand
+    - Name: m_Mode
+      Entry: 3
+      Data: 0
+    - Name: m_Arguments
+      Entry: 7
+      Data: 13|UnityEngine.Events.ArgumentCache, UnityEngine.CoreModule
+    - Name: m_ObjectArgument
+      Entry: 10
+      Data: 2
+    - Name: m_ObjectArgumentAssemblyTypeName
+      Entry: 1
+      Data: UnityEngine.Object, UnityEngine
+    - Name: m_IntArgument
+      Entry: 3
+      Data: 0
+    - Name: m_FloatArgument
+      Entry: 4
+      Data: 0
+    - Name: m_StringArgument
+      Entry: 1
+      Data: 
+    - Name: m_BoolArgument
+      Entry: 5
+      Data: false
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: m_CallState
+      Entry: 3
+      Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: setcgpoints
+    - Name: $v
+      Entry: 7
+      Data: 14|WIS.TwitchComponent.Commands.Command, Assembly-CSharp
+    - Name: CommandString
+      Entry: 1
+      Data: setcgpoints
+    - Name: UserLevel
+      Entry: 3
+      Data: 8
+    - Name: OnCommandAction
+      Entry: 7
+      Data: 15|WIS.TwitchComponent.Commands.CommandAction, Assembly-CSharp
+    - Name: m_PersistentCalls
+      Entry: 7
+      Data: 16|UnityEngine.Events.PersistentCallGroup, UnityEngine.CoreModule
+    - Name: m_Calls
+      Entry: 7
+      Data: 17|System.Collections.Generic.List`1[[UnityEngine.Events.PersistentCall,
+        UnityEngine.CoreModule]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 18|UnityEngine.Events.PersistentCall, UnityEngine.CoreModule
+    - Name: m_Target
+      Entry: 10
+      Data: 0
+    - Name: m_MethodName
+      Entry: 1
+      Data: SetPointsCommand
+    - Name: m_Mode
+      Entry: 3
+      Data: 0
+    - Name: m_Arguments
+      Entry: 7
+      Data: 19|UnityEngine.Events.ArgumentCache, UnityEngine.CoreModule
+    - Name: m_ObjectArgument
+      Entry: 10
+      Data: 3
+    - Name: m_ObjectArgumentAssemblyTypeName
+      Entry: 1
+      Data: UnityEngine.Object, UnityEngine
+    - Name: m_IntArgument
+      Entry: 3
+      Data: 0
+    - Name: m_FloatArgument
+      Entry: 4
+      Data: 0
+    - Name: m_StringArgument
+      Entry: 1
+      Data: 
+    - Name: m_BoolArgument
+      Entry: 5
+      Data: false
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: m_CallState
+      Entry: 3
+      Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
       Entry: 13
       Data: 
     - Name: 
       Entry: 8
       Data: 
   DictionaryId: User Manager
---- !u!114 &1231708684967076851
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2696880165221182648}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90abe567b87169a40a6b2535d34adb19, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _GameEvent: {fileID: 11400000, guid: f0a552e5c53a31040966fd3a0c4c25c9, type: 2}
-  _Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2696880165221182654}
-        m_MethodName: TwitchPointRedeemed
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2

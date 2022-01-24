@@ -5,6 +5,12 @@ namespace ColorGame.User {
     public class UserCollection {
         private Dictionary<string, User> _users = new Dictionary<string, User>();
 
+        public int Count {
+            get {
+                return _users.Count;
+            }
+        }
+
         public List<User> UserList {
             get {
                 return _users.Values.ToList();

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Linq;
+using System.Collections.Generic;
 using UnityEngine;
 using WIS.TwitchComponent;
 using WIS.TwitchComponent.Events;
@@ -13,7 +14,7 @@ namespace ColorGame.User {
         private UserPointRedeemDictionary _pointRedeemDictionary;
 
         [SerializeField]
-        private UserCommandDictionary _commandDictionary = null;
+        private UserSaveDataUpdatedEvent _saveDataUpdatedEvent = null;
         
         private void Awake() {
             Instance = this;
@@ -35,6 +36,7 @@ namespace ColorGame.User {
             }
 
             _users.SetUsers(users);
+            HandleSaveDataUpdatedEvent();
         }
 
         public void CreateUser(string userName, string displayName, int points) {
@@ -72,6 +74,15 @@ namespace ColorGame.User {
             SaveCurrentUserData();
         }
 
+        public void SetPoints(string userName, int points) {
+            if (!_users.IsValidUser(userName)) {
+                return;
+            }
+
+            _users.UpdateUserPoint(userName, points);
+            SaveCurrentUserData();
+        }
+
         private void HandlePointRedeem(string redeemKey, string userName, string displayName) {
             int points = _pointRedeemDictionary.GetRedeemValue(redeemKey);
 
@@ -88,6 +99,22 @@ namespace ColorGame.User {
 
         private void SaveCurrentUserData() {
             _saveLoadManager.SaveUserData(_users.UserList);
+            HandleSaveDataUpdatedEvent();
+        }
+
+        private void HandleSaveDataUpdatedEvent() {
+            var users = SortedUsersByRank();
+            _saveDataUpdatedEvent?.Raise(new UserSaveDataUpdatedEventArgs() {
+                Users = users
+            });
+        }
+
+        public List<User> SortedUsersByRank() {
+            if (_users.Count == 0) {
+                return null;
+            }
+
+            return _users.UserList.OrderByDescending(user => user.UserPoints).ToList();
         }
 
         #region Twitch Redeems
@@ -117,6 +144,41 @@ namespace ColorGame.User {
 
             message = string.Format(InquirePointMessage, user.DisplayName, user.UserPoints.ToString());
             TwitchComponent.SendTwitchMessage(message);
+        }
+
+        private const string PointsSetToUserCommandMessage = "{0}'s total point was changed to {1}";
+        public void SetPointsCommand(string userName, string[] args) {
+            if (args.Length != 2) return;
+
+            string rewardingUserName = args[0].Substring(1);
+            var user = _users.GetUser(rewardingUserName);
+            if (user == null) {
+                return;
+            }
+
+            if (int.TryParse(args[1], out int points)) {
+                AddPoints(rewardingUserName, points);
+                string message = string.Format(PointsSetToUserCommandMessage, rewardingUserName, points);
+                TwitchComponent.SendTwitchMessage(message);
+            }
+        }
+
+        private const string PointsAddedToUserCommandMessage = "{0} points are added to {1} total points. Current point is {2}";
+        public void AddPointsCommand(string userName, string[] args) {
+            if (args.Length != 2) return;
+
+            string rewardingUserName = args[0].Substring(1);
+            var user = _users.GetUser(rewardingUserName);
+            if (user == null) {
+                return;
+            }
+
+            int currentPoints = user.UserPoints;
+            if (int.TryParse(args[1], out int points)) {
+                AddPoints(rewardingUserName, points);
+                string message = string.Format(PointsAddedToUserCommandMessage, points, rewardingUserName, currentPoints + points);
+                TwitchComponent.SendTwitchMessage(message);
+            }
         }
 
         #endregion
