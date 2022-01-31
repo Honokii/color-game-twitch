@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ColorId: 3
   ColorName: orange
-  ColorValue: {r: 1, g: 0.28235295, b: 0, a: 0}
+  ColorValue: {r: 1, g: 0.49803925, b: 0, a: 1}

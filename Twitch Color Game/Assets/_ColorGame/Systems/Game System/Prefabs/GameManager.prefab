@@ -46,20 +46,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: effc19417a08b9b44b80e0f28aeeb6c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _checkCubeFaces:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8048144149188246946}
-        m_MethodName: HandleBetRewards
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &8048144149188246946
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72,6 +58,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0e6a7a764501514284f0564d438e859, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _betListUpdatedEvent: {fileID: 11400000, guid: cbfd5cc8ac87d0d45817225797aba0fb,
+    type: 2}
 --- !u!114 &8248079427101329986
 MonoBehaviour:
   m_ObjectHideFlags: 0

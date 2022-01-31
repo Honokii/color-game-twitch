@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using EnhancedUI.EnhancedScroller;
@@ -10,24 +10,45 @@ namespace ColorGame.UI {
         private EnhancedScroller _scroller;
 
         [SerializeField]
-        private EnhancedScrollerCellView _cellPrefab;
+        private float _cellSize = 30f;
 
         [SerializeField]
-        private float _cellSize = 200;
+        private EnhancedScrollerCellView _cellPrefab;
 
         private List<Bet> _bets = new List<Bet>();
 
         #region Unity Methods
-        private void Start() {
+        private void Awake() {
             _scroller.Delegate = this;
             _scroller.ReloadData();
         }
+
         #endregion
 
-        #region Scroller Delegate
+        public void UpdateBets(List<Bet> bets) {
+            _bets = bets;
+            _scroller.ReloadData();
+        }
+
+        #region Bet Events
+
+        public void BetListUpdated(OnBetListUpdatedEventArgs args) {
+            if (args.Bets == null) {
+                UpdateBets(new List<Bet>());
+                return;
+            }
+
+            UpdateBets(args.Bets);
+        }
+
+        #endregion
+
+        #region Enhanced Scroller Delegate
         public EnhancedScrollerCellView GetCellView(EnhancedScroller scroller, int dataIndex, int cellIndex) {
             BetUI cell = scroller.GetCellView(_cellPrefab) as BetUI;
-
+            var bet = _bets[dataIndex];
+            var betColor = ColorCollection.Instance.GetColorData(bet.ColorFaceId);
+            cell.SetBetUI(bet.UserName, bet.Amount, betColor.ColorValue);
             return cell;
         }
 
@@ -36,9 +57,9 @@ namespace ColorGame.UI {
         }
 
         public int GetNumberOfCells(EnhancedScroller scroller) {
-            return _bets == null ? 0 : _bets.Count;
+            return _bets.Count;
         }
-        #endregion
 
+        #endregion
     }
 }

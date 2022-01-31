@@ -9,9 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42c3f0ce9f869bf40a4ed559d675211e, type: 3}
-  m_Name: ColorViolet
+  m_Script: {fileID: 11500000, guid: a3448a9f670b77c4789796c473126220, type: 3}
+  m_Name: OnBetListUpdatedEvent
   m_EditorClassIdentifier: 
-  ColorId: 5
-  ColorName: violet
-  ColorValue: {r: 0.72156864, g: 0, b: 0.9686275, a: 1}

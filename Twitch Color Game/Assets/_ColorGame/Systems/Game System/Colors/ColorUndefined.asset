@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ColorId: 0
   ColorName: undefined
-  ColorValue: {r: 1, g: 1, b: 1, a: 0}
+  ColorValue: {r: 1, g: 1, b: 1, a: 1}
